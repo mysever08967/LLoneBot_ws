@@ -1,5 +1,4 @@
-﻿using BOT_API_List;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -14,9 +13,9 @@ using static WindowsFormsApp1.MySvrForm;
 internal class WebSocketServer
 {
     private string wsURL;
-    private BOTMsgQueue BOTMsg;
     private HttpListener listener = null;
     public static object objec = new object();
+
     public async void Start(int port)
     {
         string url = $"http://127.0.0.1:{port}/";
@@ -33,12 +32,11 @@ internal class WebSocketServer
             MessageBox.Show($"{port}:开启失败,请检查端口是否开放");
             return;
         }
-        BOT_API.BOTList_WebSocket.Clear();
         wsURL = url;
         //异步 消息收发处理队列
-        BOTMsg = new BOTMsgQueue();
-        BOTMsg.Msgstart();
-        BOTMsg.sendstart();
+        //BOTMsg = new BOTMsgQueue();
+        //BOTMsg.Msgstart();
+        //BOTMsg.sendstart();
         LOGdata lOGdata = new LOGdata
         {
             a = "WebSocket",
@@ -62,13 +60,10 @@ internal class WebSocketServer
                     var Self_ID = headers["X-Self-ID"];
                     Console.WriteLine(Self_ID);
                     HttpListenerWebSocketContext wtext = await context.AcceptWebSocketAsync(null);
-                    BOT_LIST bOT_LIST = new BOT_LIST
-                    {
-                        Self_ID = Self_ID,
-                        Self_WebSocket = wtext.WebSocket
-                    };
-                    BOT_API.BOTList_WebSocket.Add(bOT_LIST);
-                    _ = ReceiveMessages_S(bOT_LIST);
+                    Self_Client self_Client = new Self_Client();
+                    self_Client.Start(wtext.WebSocket, Self_ID);
+                    mForm.List_Self_ClientADD(self_Client);
+                    _ = ReceiveMessages_S(self_Client);
                 }
                 else
                 {
@@ -82,71 +77,33 @@ internal class WebSocketServer
         }
     }
 
-    private async Task ReceiveMessages_S(BOT_LIST BOT)
+    private async Task ReceiveMessages_S(Self_Client BOT)
     {
         byte[] buffer = new byte[1024];
         List<byte> messageBuffer = new List<byte>();
-        WebSocketReceiveResult result = await BOT.Self_WebSocket.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
+        WebSocketReceiveResult result = await BOT.webSocket.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
         try
         {
-            while (!result.CloseStatus.HasValue && BOT.Self_WebSocket.State == WebSocketState.Open)
+            while (!result.CloseStatus.HasValue && BOT.webSocket.State == WebSocketState.Open)
             {
                 messageBuffer.AddRange(buffer.Take(result.Count));
                 if (result.EndOfMessage)
                 {
                     string message = Encoding.UTF8.GetString(messageBuffer.ToArray());
-
-                    BOT_msgWS bOT_MsgWS = new BOT_msgWS
-                    {
-                        message = message,
-                        _WebSocket = BOT.Self_WebSocket,
-                        Self_ID = BOT.Self_ID
-                    };
-                    BOT_API.ReceiveMessage_Queue.Enqueue(bOT_MsgWS);
+                    BOT.ReceiveQueue.Enqueue(message);
                     messageBuffer.Clear();
                 }
-                result = await BOT.Self_WebSocket.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
+                result = await BOT.webSocket.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
             }
         }
         catch (Exception Ex)
         {
-            Thread th = new Thread(() =>
-            {
-                Exstop(BOT, Ex);
-            });
-            th.Start();
+            mForm.List_Self_ClientDel(BOT, Ex);
+        }
+    }
 
-        }
-    }
-    public void Exstop(BOT_LIST BOT, Exception Ex)
-    {
-        lock (objec)
-        {
-            for (int i = 0; i < BOT_API.BOTList_WebSocket.Count; i++)
-            {
-                if (BOT_API.BOTList_WebSocket[i].Self_ID == BOT.Self_ID)
-                {
-                    LOGdata lOGdata = new LOGdata
-                    {
-                        a = "WebSocket",
-                        b = "WebSocket",
-                        c = BOT.Self_ID,
-                        d = "已断开",
-                        e = Ex.Message
-                    };
-                    MySvrForm.BOT_LoglistADD(lOGdata);
-                    BOT_API.BOTList_WebSocket.RemoveAt(i);
-                    break;
-                }
-            }
-        }
-    }
     public void stop()
     {
-        foreach (var item in BOT_API.BOTList_WebSocket)
-        {
-            item.Self_WebSocket?.CloseAsync(WebSocketCloseStatus.NormalClosure, "Server shutting down", CancellationToken.None);
-        }
         listener?.Stop();
         listener?.Close();
         //BOT_API.botWebSocket?.CloseAsync(WebSocketCloseStatus.NormalClosure, "Server shutting down", CancellationToken.None);

@@ -52,9 +52,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BOT_API.cs" />
-    <Compile Include="BOT_Group_Message.cs" />
-    <Compile Include="BOT_ReceiveMsg.cs" />
     <Compile Include="BOT_WebSocketSever.cs" />
     <Compile Include="Form_Main.cs">
       <SubType>Form</SubType>
@@ -64,6 +61,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Self_Client.cs" />
     <EmbeddedResource Include="Form_Main.resx">
       <DependentUpon>Form_Main.cs</DependentUpon>
     </EmbeddedResource>

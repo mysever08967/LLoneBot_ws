@@ -1,7 +1,5 @@
-﻿using BOT_ReceiveMsg_T;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
@@ -12,6 +10,7 @@ namespace WindowsFormsApp1
 {
     public partial class MySvrForm : Form
     {
+        private static List<Self_Client> List_Self_Client = new List<Self_Client>();
         public static Queue<string> Timergroup = new Queue<string>();
         public static MySvrForm mForm { get; private set; }
         public bool RoomViListisOpen { get; private set; }
@@ -21,9 +20,36 @@ namespace WindowsFormsApp1
         private int Itemsindex = -1;
         public static object obj = new object();
 
+        internal void List_Self_ClientADD(Self_Client Client)
+        {
+            List_Self_Client.Add(Client);
+        }
+
+        internal void List_Self_ClientDel(Self_Client BOT, Exception Ex)
+        {
+            for (int i = 0; i < List_Self_Client.Count; i++)
+            {
+                if (BOT == List_Self_Client[i])
+                {
+                    LOGdata lOGdata = new LOGdata
+                    {
+                        a = "账号:" + BOT.Self_ID,
+                        b = "账号:" + BOT.Self_ID,
+                        c = "账号:" + BOT.Self_ID,
+                        d = "断开连接",
+                        e = Ex.Message
+                    };
+                    BOT_LoglistADD(lOGdata);
+                    List_Self_Client.RemoveAt(i);
+                    break;
+                }
+            }
+        }
+
         public void WebSocketServerAsync(int port)
         {
             openWS = true;
+            List_Self_Client.Clear();
             WebSocketServer = new WebSocketServer();
             WebSocketServer.Start(port);
         }
@@ -43,6 +69,7 @@ namespace WindowsFormsApp1
         }
 
         public delegate void AppendTextDelegate(System.Windows.Forms.ListViewItem item1);
+
         public static void BOT_Log(LOGdata data)
         {
             try
@@ -83,12 +110,9 @@ namespace WindowsFormsApp1
             }
             catch (Exception)
             {
-
-                
             }
-           
-     
         }
+
         //BOT日志列表
         public static void BOT_LoglistADD(LOGdata data)
         {
@@ -99,27 +123,27 @@ namespace WindowsFormsApp1
             th.Start();
         }
 
-        public static void BOT_group_member_ListViewADD(List<group_member> member_List)
-        {
-            mForm.group_member_ListView.Items.Clear();
-            for (int i = 0; i < member_List.Count; i++)
-            {
-                System.Windows.Forms.ListViewItem item1 = new System.Windows.Forms.ListViewItem(
-                    new[] {
-                        member_List[i].user_id,
-                        member_List[i].user_name,
-                        member_List[i].card,
-                        member_List[i].role,
-                        member_List[i].join_time,
-                        member_List[i].last_sent_time,
-                    });
-                setGourp = member_List[i].group_id;
-                Color txtColor1 = Color.FromArgb(0, 39, 37, 39);
-                item1.BackColor = txtColor1;
-                item1.ForeColor = Color.Cyan;
-                mForm.group_member_ListView.Items.Add(item1);
-            }
-        }
+        //public static void BOT_group_member_ListViewADD(List<group_member> member_List)
+        //{
+        //    mForm.group_member_ListView.Items.Clear();
+        //    for (int i = 0; i < member_List.Count; i++)
+        //    {
+        //        System.Windows.Forms.ListViewItem item1 = new System.Windows.Forms.ListViewItem(
+        //            new[] {
+        //                member_List[i].user_id,
+        //                member_List[i].user_name,
+        //                member_List[i].card,
+        //                member_List[i].role,
+        //                member_List[i].join_time,
+        //                member_List[i].last_sent_time,
+        //            });
+        //        setGourp = member_List[i].group_id;
+        //        Color txtColor1 = Color.FromArgb(0, 39, 37, 39);
+        //        item1.BackColor = txtColor1;
+        //        item1.ForeColor = Color.Cyan;
+        //        mForm.group_member_ListView.Items.Add(item1);
+        //    }
+        //}
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -196,6 +220,8 @@ namespace WindowsFormsApp1
         private void WS_stop_Click(object sender, EventArgs e)
         {
             openWS = false;
+            List_Self_Client.Clear();
+            MessageBox.Show("WebSocketSever: 已关闭");
             if (WebSocketServer == null)
                 return;
             WebSocketServer.stop();
@@ -211,8 +237,6 @@ namespace WindowsFormsApp1
         {
             BOT_Exit();
         }
-
-
 
         private void BOT_set_Click(object sender, EventArgs e)
         {
@@ -284,9 +308,7 @@ namespace WindowsFormsApp1
             Clipboard.SetText(selectedItem.SubItems[5].Text);
         }
 
-
-
-        public class LOGdata 
+        public class LOGdata
         {
             public string a;
             public string b;

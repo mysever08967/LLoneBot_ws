@@ -45,39 +45,48 @@ namespace WindowsFormsApp1
         public delegate void AppendTextDelegate(System.Windows.Forms.ListViewItem item1);
         public static void BOT_Log(LOGdata data)
         {
-            lock (obj)
+            try
             {
-                DateTime now = DateTime.Now;
-                string time = now.ToString("HH:mm:ss");
-                System.Windows.Forms.ListViewItem item1 = new System.Windows.Forms.ListViewItem(
-                    new[] {
+                lock (obj)
+                {
+                    DateTime now = DateTime.Now;
+                    string time = now.ToString("HH:mm:ss");
+                    System.Windows.Forms.ListViewItem item1 = new System.Windows.Forms.ListViewItem(
+                        new[] {
                     time,
                     data.a,
                     data.b,
                     data.c,
                     data.d,
                     data.e
-                    });
-                Color txtColor1 = new Color();
-                txtColor1 = Color.FromArgb(0, 39, 37, 39);
-                item1.BackColor = txtColor1;
-                item1.ForeColor = Color.Cyan;
-                void UpdateLog() => mForm.BOTlist.Items.Add(item1);
-                mForm.BOTlist.Invoke(new Action(UpdateLog));
-                mForm.indexBOXLOG++;
-                if (mForm.indexBOXLOG > 15)
-                {
-                    void UpEnsureVisible() => mForm.BOTlist.EnsureVisible(mForm.BOTlist.Items.Count - 1);
-                    mForm.BOTlist.Invoke(new Action(UpEnsureVisible));
-                }
+                        });
+                    Color txtColor1 = new Color();
+                    txtColor1 = Color.FromArgb(0, 39, 37, 39);
+                    item1.BackColor = txtColor1;
+                    item1.ForeColor = Color.Cyan;
+                    void UpdateLog() => mForm.BOTlist.Items.Add(item1);
+                    mForm.BOTlist.Invoke(new Action(UpdateLog));
+                    mForm.indexBOXLOG++;
+                    if (mForm.indexBOXLOG > 15)
+                    {
+                        void UpEnsureVisible() => mForm.BOTlist.EnsureVisible(mForm.BOTlist.Items.Count - 1);
+                        mForm.BOTlist.Invoke(new Action(UpEnsureVisible));
+                    }
 
-                if (mForm.indexBOXLOG >= 1000)
-                {
-                    mForm.indexBOXLOG = -1;
-                    void UpClear() => mForm.BOTlist.Items.Clear();
-                    mForm.BOTlist.Invoke(new Action(UpClear));
+                    if (mForm.indexBOXLOG >= 1000)
+                    {
+                        mForm.indexBOXLOG = -1;
+                        void UpClear() => mForm.BOTlist.Items.Clear();
+                        mForm.BOTlist.Invoke(new Action(UpClear));
+                    }
                 }
             }
+            catch (Exception)
+            {
+
+                
+            }
+           
      
         }
         //BOT日志列表

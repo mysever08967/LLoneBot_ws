@@ -106,7 +106,6 @@ namespace WindowsFormsApp1
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MySvrForm));
-            this.label2 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.G_USERBOX = new System.Windows.Forms.ComboBox();
@@ -145,15 +144,7 @@ namespace WindowsFormsApp1
             this.label_Revsend = new System.Windows.Forms.Label();
             this.BotVer = new System.Windows.Forms.Label();
             this.BOTSET = new System.Windows.Forms.TabPage();
-            this.listView_bot = new System.Windows.Forms.ListView();
-            this.index = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.QQ = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.name = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.ws = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Tbox_wsProt = new System.Windows.Forms.TextBox();
-            this.botText2 = new System.Windows.Forms.Label();
-            this.botText = new System.Windows.Forms.Label();
-            this.checkBox_BOTAPIMSG = new System.Windows.Forms.CheckBox();
             this.WS_stop = new System.Windows.Forms.Button();
             this.button_WS_start = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -173,20 +164,6 @@ namespace WindowsFormsApp1
             this.TabListGmaneSet.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.BackColor = System.Drawing.Color.Transparent;
-            this.label2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label2.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.ForeColor = System.Drawing.Color.Cyan;
-            this.label2.Location = new System.Drawing.Point(469, 3);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(63, 14);
-            this.label2.TabIndex = 24;
-            this.label2.Text = "My Sever";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // button2
             // 
@@ -321,7 +298,7 @@ namespace WindowsFormsApp1
             this.Exit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
             this.Exit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Exit.ForeColor = System.Drawing.Color.Cyan;
-            this.Exit.Location = new System.Drawing.Point(9, 398);
+            this.Exit.Location = new System.Drawing.Point(10, 200);
             this.Exit.Margin = new System.Windows.Forms.Padding(0);
             this.Exit.Name = "Exit";
             this.Exit.Size = new System.Drawing.Size(120, 24);
@@ -470,11 +447,11 @@ namespace WindowsFormsApp1
             // 
             // label_Revsend
             // 
-            this.label_Revsend.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(37)))), ((int)(((byte)(39)))));
+            this.label_Revsend.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(37)))), ((int)(((byte)(60)))));
             this.label_Revsend.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.label_Revsend.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label_Revsend.ForeColor = System.Drawing.Color.Cyan;
-            this.label_Revsend.Location = new System.Drawing.Point(0, 20);
+            this.label_Revsend.Location = new System.Drawing.Point(0, 372);
             this.label_Revsend.Name = "label_Revsend";
             this.label_Revsend.Size = new System.Drawing.Size(140, 15);
             this.label_Revsend.TabIndex = 56;
@@ -483,11 +460,11 @@ namespace WindowsFormsApp1
             // 
             // BotVer
             // 
-            this.BotVer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(37)))), ((int)(((byte)(39)))));
+            this.BotVer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(37)))), ((int)(((byte)(60)))));
             this.BotVer.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.BotVer.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.BotVer.ForeColor = System.Drawing.Color.Cyan;
-            this.BotVer.Location = new System.Drawing.Point(0, 46);
+            this.BotVer.Location = new System.Drawing.Point(0, 404);
             this.BotVer.Name = "BotVer";
             this.BotVer.Size = new System.Drawing.Size(140, 15);
             this.BotVer.TabIndex = 57;
@@ -497,11 +474,7 @@ namespace WindowsFormsApp1
             // BOTSET
             // 
             this.BOTSET.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(37)))), ((int)(((byte)(39)))));
-            this.BOTSET.Controls.Add(this.listView_bot);
             this.BOTSET.Controls.Add(this.Tbox_wsProt);
-            this.BOTSET.Controls.Add(this.botText2);
-            this.BOTSET.Controls.Add(this.botText);
-            this.BOTSET.Controls.Add(this.checkBox_BOTAPIMSG);
             this.BOTSET.Controls.Add(this.WS_stop);
             this.BOTSET.Controls.Add(this.button_WS_start);
             this.BOTSET.Controls.Add(this.label1);
@@ -512,50 +485,11 @@ namespace WindowsFormsApp1
             this.BOTSET.TabIndex = 1;
             this.BOTSET.Text = "框架设置";
             // 
-            // listView_bot
-            // 
-            this.listView_bot.Alignment = System.Windows.Forms.ListViewAlignment.Default;
-            this.listView_bot.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(37)))), ((int)(((byte)(60)))));
-            this.listView_bot.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.listView_bot.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.index,
-            this.QQ,
-            this.name,
-            this.ws});
-            this.listView_bot.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(37)))), ((int)(((byte)(60)))));
-            this.listView_bot.FullRowSelect = true;
-            this.listView_bot.GridLines = true;
-            this.listView_bot.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
-            this.listView_bot.HideSelection = false;
-            this.listView_bot.Location = new System.Drawing.Point(1, 53);
-            this.listView_bot.Margin = new System.Windows.Forms.Padding(0);
-            this.listView_bot.Name = "listView_bot";
-            this.listView_bot.Size = new System.Drawing.Size(760, 426);
-            this.listView_bot.TabIndex = 29;
-            this.listView_bot.UseCompatibleStateImageBehavior = false;
-            this.listView_bot.View = System.Windows.Forms.View.Details;
-            // 
-            // index
-            // 
-            this.index.Width = 30;
-            // 
-            // QQ
-            // 
-            this.QQ.Width = 100;
-            // 
-            // name
-            // 
-            this.name.Width = 120;
-            // 
-            // ws
-            // 
-            this.ws.Width = 100;
-            // 
             // Tbox_wsProt
             // 
             this.Tbox_wsProt.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(37)))), ((int)(((byte)(39)))));
             this.Tbox_wsProt.ForeColor = System.Drawing.Color.Aqua;
-            this.Tbox_wsProt.Location = new System.Drawing.Point(71, 12);
+            this.Tbox_wsProt.Location = new System.Drawing.Point(78, 143);
             this.Tbox_wsProt.MaxLength = 5;
             this.Tbox_wsProt.Name = "Tbox_wsProt";
             this.Tbox_wsProt.Size = new System.Drawing.Size(80, 21);
@@ -566,48 +500,13 @@ namespace WindowsFormsApp1
             this.Tbox_wsProt.WordWrap = false;
             this.Tbox_wsProt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Tbox_wsProt_KeyPress);
             // 
-            // botText2
-            // 
-            this.botText2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(37)))), ((int)(((byte)(39)))));
-            this.botText2.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.botText2.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.botText2.ForeColor = System.Drawing.Color.Cyan;
-            this.botText2.Location = new System.Drawing.Point(651, 8);
-            this.botText2.Name = "botText2";
-            this.botText2.Size = new System.Drawing.Size(101, 410);
-            this.botText2.TabIndex = 28;
-            this.botText2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // botText
-            // 
-            this.botText.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(37)))), ((int)(((byte)(39)))));
-            this.botText.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.botText.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.botText.ForeColor = System.Drawing.Color.Cyan;
-            this.botText.Location = new System.Drawing.Point(516, 8);
-            this.botText.Name = "botText";
-            this.botText.Size = new System.Drawing.Size(116, 410);
-            this.botText.TabIndex = 27;
-            this.botText.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // checkBox_BOTAPIMSG
-            // 
-            this.checkBox_BOTAPIMSG.AutoSize = true;
-            this.checkBox_BOTAPIMSG.ForeColor = System.Drawing.Color.Cyan;
-            this.checkBox_BOTAPIMSG.Location = new System.Drawing.Point(352, 17);
-            this.checkBox_BOTAPIMSG.Name = "checkBox_BOTAPIMSG";
-            this.checkBox_BOTAPIMSG.Size = new System.Drawing.Size(96, 16);
-            this.checkBox_BOTAPIMSG.TabIndex = 26;
-            this.checkBox_BOTAPIMSG.Text = "原始收发消息";
-            this.checkBox_BOTAPIMSG.UseVisualStyleBackColor = true;
-            // 
             // WS_stop
             // 
             this.WS_stop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(37)))), ((int)(((byte)(39)))));
             this.WS_stop.CausesValidation = false;
             this.WS_stop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.WS_stop.ForeColor = System.Drawing.Color.Cyan;
-            this.WS_stop.Location = new System.Drawing.Point(233, 11);
+            this.WS_stop.Location = new System.Drawing.Point(240, 142);
             this.WS_stop.Name = "WS_stop";
             this.WS_stop.Size = new System.Drawing.Size(70, 23);
             this.WS_stop.TabIndex = 3;
@@ -622,7 +521,7 @@ namespace WindowsFormsApp1
             this.button_WS_start.CausesValidation = false;
             this.button_WS_start.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button_WS_start.ForeColor = System.Drawing.Color.Cyan;
-            this.button_WS_start.Location = new System.Drawing.Point(157, 11);
+            this.button_WS_start.Location = new System.Drawing.Point(164, 142);
             this.button_WS_start.Name = "button_WS_start";
             this.button_WS_start.Size = new System.Drawing.Size(70, 23);
             this.button_WS_start.TabIndex = 1;
@@ -637,7 +536,7 @@ namespace WindowsFormsApp1
             this.label1.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.label1.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label1.ForeColor = System.Drawing.Color.Cyan;
-            this.label1.Location = new System.Drawing.Point(12, 16);
+            this.label1.Location = new System.Drawing.Point(19, 147);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(61, 19);
             this.label1.TabIndex = 11;
@@ -733,6 +632,7 @@ namespace WindowsFormsApp1
             // 
             // pictureBox2
             // 
+            this.pictureBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(37)))), ((int)(((byte)(60)))));
             this.pictureBox2.Location = new System.Drawing.Point(0, 0);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(140, 451);
@@ -745,10 +645,9 @@ namespace WindowsFormsApp1
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(37)))), ((int)(((byte)(39)))));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(945, 478);
+            this.ClientSize = new System.Drawing.Size(900, 478);
             this.Controls.Add(this.BotVer);
             this.Controls.Add(this.label_Revsend);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.butXH);
             this.Controls.Add(this.butExit);
             this.Controls.Add(this.Exit);
@@ -773,20 +672,15 @@ namespace WindowsFormsApp1
             this.TabListGmaneSet.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
 
         #endregion
-        private Label label2;
         protected internal Label label_Revsend;
         protected internal Label BotVer;
         private TabPage BOTSET;
         protected internal TextBox Tbox_wsProt;
-        protected internal Label botText2;
-        protected internal Label botText;
-        protected internal CheckBox checkBox_BOTAPIMSG;
         private Button WS_stop;
         private Button button_WS_start;
         protected internal Label label1;
@@ -800,11 +694,6 @@ namespace WindowsFormsApp1
         private ColumnHeader meg;
         protected internal TabControl TabListGmaneSet;
         private PictureBox pictureBox2;
-        protected internal ListView listView_bot;
-        private ColumnHeader index;
-        private ColumnHeader QQ;
-        private ColumnHeader name;
-        private ColumnHeader ws;
     }
 }
 

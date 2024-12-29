@@ -12,11 +12,10 @@ using WindowsFormsApp1;
 
 internal class WebSocketServer
 {
-   
     private string wsURL;
     private BOTMsgQueue BOTMsg;
     private HttpListener listener = null;
-  
+
     public async void Start(int port)
     {
         string url = $"http://127.0.0.1:{port}/";
@@ -43,7 +42,7 @@ internal class WebSocketServer
         //异步 消息收发处理队列
         BOTMsg = new BOTMsgQueue();
         BOTMsg.Msgstart();
-        //BOTMsg.sendstart();
+        BOTMsg.sendstart();
         MySvrForm.BOT_LoglistADD("WebSocket", "WebSocket", "WebSocket", "Start", wsURL);
         MySvrForm.mForm.TabListGmaneSet.SelectedTab = MySvrForm.mForm.TabListGmaneSet.TabPages[0];
         while (MySvrForm.mForm.openWS)
@@ -79,8 +78,6 @@ internal class WebSocketServer
         }
     }
 
-  
-
     private async Task ReceiveMessages_S(BOT_LIST BOT)
     {
         byte[] buffer = new byte[1024];
@@ -94,7 +91,7 @@ internal class WebSocketServer
                 if (result.EndOfMessage)
                 {
                     string message = Encoding.UTF8.GetString(messageBuffer.ToArray());
-               
+
                     BOT_msgWS bOT_MsgWS = new BOT_msgWS();
                     bOT_MsgWS.message = message;
                     bOT_MsgWS._WebSocket = BOT.Self_WebSocket;
@@ -116,14 +113,11 @@ internal class WebSocketServer
                     break;
                 }
             }
-         
         }
     }
 
-
     public void stop()
     {
-
         foreach (var item in BOT_API.BOTList_WebSocket)
         {
             item.Self_WebSocket?.CloseAsync(WebSocketCloseStatus.NormalClosure, "Server shutting down", CancellationToken.None);

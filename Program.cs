@@ -11,8 +11,9 @@ namespace WindowsFormsApp1
         /// <summary>
         /// 应用程序的主入口点。
         /// </summary>
-        ///  
+        ///
         private static Mutex mutex;
+
         [STAThread]
         private static void Main()
         {
@@ -33,7 +34,7 @@ namespace WindowsFormsApp1
             //MessageBox.Show("An error occurred: " + e.Exception.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             DateTime cTime = DateTime.Now;
             string m = $"{cTime:yyyy-MM-dd HH:mm:ss}\n{e.Exception.Message}\n{e.Exception.StackTrace}";
-            string directory = AppDomain.CurrentDomain.BaseDirectory; 
+            string directory = AppDomain.CurrentDomain.BaseDirectory;
             string fullPath = Path.Combine(directory, "Error.log");
             using (StreamWriter writer = new StreamWriter(fullPath, true))
             {

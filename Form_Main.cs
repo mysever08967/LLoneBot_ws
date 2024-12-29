@@ -1,21 +1,9 @@
-﻿using System;
+﻿using BOT_ReceiveMsg_T;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
-using System.Drawing.Imaging;
-using System.IO;
-using System.Net;
-using System.Security.Principal;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using BOT_API_List;
-using BOT_ReceiveMsg_T;
-using GroupMessageDealWith;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using MessageBox = System.Windows.Forms.MessageBox;
 using Point = System.Drawing.Point;
 
@@ -40,7 +28,6 @@ namespace WindowsFormsApp1
             openWS = true;
             WebSocketServer = new WebSocketServer();
             WebSocketServer.Start(port);
-            
         }
 
         public MySvrForm()
@@ -49,28 +36,30 @@ namespace WindowsFormsApp1
             mForm = this;
         }
 
-        // 启动读配置
         public void InStart()
         {
             mForm.BOTlist.Items.Clear();
             mForm.TabListGmaneSet.SelectedTab = mForm.TabListGmaneSet.TabPages[1];
             mForm.TabListGmaneSet.SetBounds(135, 20, 772, 452);
             mForm.SetBounds(50, 50, 900, 450);
-
-
         }
 
         public delegate void AppendTextDelegate(System.Windows.Forms.ListViewItem item1);
-
-
-  
 
         //BOT日志列表
         public static void BOT_LoglistADD(string group_name, string group_id, string user_id, string user_name, string msg)
         {
             DateTime now = DateTime.Now;
             string timeString = now.ToString("HH:mm:ss");
-            System.Windows.Forms.ListViewItem item1 = new System.Windows.Forms.ListViewItem(new[] { timeString, group_name, group_id, user_id, user_name, msg });
+            System.Windows.Forms.ListViewItem item1 = new System.Windows.Forms.ListViewItem(
+                new[] {
+                    timeString,
+                    group_name,
+                    group_id,
+                    user_id,
+                    user_name,
+                    msg
+                });
             Color txtColor1 = new Color();
             txtColor1 = Color.FromArgb(0, 39, 37, 39);
             item1.BackColor = txtColor1;
@@ -114,32 +103,9 @@ namespace WindowsFormsApp1
             }
         }
 
-        public static void BOT_gourpBoxADD(List<Group_list> m)
-        {
-            mForm.G_USERBOX.Items.Clear();
-            mForm.G_USERBOX.Items.Add("暂无选择");
-            mForm.G_USERBOX.SelectedIndex = 0;
-            for (int i = 0; i < m.Count; i++)
-            {
-                mForm.G_USERBOX.Items.Add($"[{m[i].group_id}] {m[i].group_name}");
-            }
-        }
-
-        //初始化界面bot信息   Cyan
-        public static void BOT_Initialize()
-        {
-            mForm.BotVer.Text = "版本: 待获取";
-        }
-
         private void Form1_Load(object sender, EventArgs e)
         {
             InStart();
-            //Thread t = new Thread(() =>
-            //{
-            //    InStart();
-
-            //});
-            //t.Start();
         }
 
         private bool isDragging = false;
@@ -186,12 +152,6 @@ namespace WindowsFormsApp1
             }
         }
 
-
-
-
-
-
-
         private void button1_Click_2Async(object sender, EventArgs e)
         {
         }
@@ -200,7 +160,7 @@ namespace WindowsFormsApp1
         {
             if (WebSocketServer != null)
             {
-                MessageBox.Show("WebSocketSever: 正在运行中");
+                MessageBox.Show("WebSocketSever: 运行中");
                 return;
             }
             if (Tbox_wsProt.Text == null)
@@ -222,7 +182,6 @@ namespace WindowsFormsApp1
                 return;
             WebSocketServer.stop();
             WebSocketServer = null;
-            BOT_Initialize();
         }
 
         private void ButLog_Click(object sender, EventArgs e)
@@ -252,10 +211,8 @@ namespace WindowsFormsApp1
 
         private void BOT_Exit()
         {
-            string str = "即将关闭主框架，是否继续退出？";
-            if (MessageBox.Show(str, "退出", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            if (MessageBox.Show("是否退出？", "退出", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
-
                 openWS = false;
                 WebSocketServer?.stop();
                 Close();
@@ -275,17 +232,6 @@ namespace WindowsFormsApp1
                 e.Handled = true;
             }
         }
-
-
-
-
-
-
-     
-
-     
-
-   
 
         private void 详细信息ToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -323,9 +269,6 @@ namespace WindowsFormsApp1
             Clipboard.SetText(selectedItem.SubItems[5].Text);
         }
 
-    
-
-      
         //退出远程桌面时也保持交互，否则无法加载新窗体
         private void console()
         {
@@ -357,31 +300,5 @@ namespace WindowsFormsApp1
                 }
             }
         }
-
-
-
-
-
-
-
-    
-
-
-      
-
-        
-
-      
-
-
-       
-
-
-
-
-    
-
-    
-       
     }
 }

@@ -35,7 +35,6 @@ namespace BOT_API_List
                 {
                     try
                     {
-                       
                         if (BOT_API.ReceiveMessage_Queue.TryDequeue(out BOT_msgWS result))
                         {//处理收到的消息
                             BOT_ReceiveMsg.BOT_MessageParsing(result);
@@ -60,11 +59,11 @@ namespace BOT_API_List
                 delayTime = 10;
                 try
                 {
-                    if (BOT_API.SendMessage_Queue.TryDequeue(out byte[] result))
+                    if (BOT_API.SendMessage_Queue.TryDequeue(out BOT_sendlist result))
                     {
-                        _ = BOT_API.botWebSocket.SendAsync(new ArraySegment<byte>(result), WebSocketMessageType.Text, true, CancellationToken.None);
-                       
-                        delayTime = 20;
+                        _ = result._WebSocket.SendAsync(new ArraySegment<byte>(result.message), WebSocketMessageType.Text, true, CancellationToken.None);
+
+                        delayTime = 100;
                     }
                 }
                 catch (Exception ex)
@@ -77,26 +76,36 @@ namespace BOT_API_List
             Console.WriteLine("发送结束");
         }
     }
-    class BOT_LIST
+
+    internal class BOT_LIST
     {
         public string Self_ID;
         public WebSocket Self_WebSocket;
     }
-    class BOT_msgWS
+
+    internal class BOT_msgWS
     {
         public string message;
         public WebSocket _WebSocket;
         public string Self_ID;
     }
+
+    internal class BOT_sendlist
+    {
+        public byte[] message;
+        public WebSocket _WebSocket;
+    }
+
     internal class BOT_API
     {
         public static bool severstart = false;
         public static int Revint;
         public static int sendint;
         public static WebSocket botWebSocket = null;
-        public static ConcurrentQueue<byte[]> SendMessage_Queue = new ConcurrentQueue<byte[]>();
+        public static ConcurrentQueue<BOT_sendlist> SendMessage_Queue = new ConcurrentQueue<BOT_sendlist>();
         public static ConcurrentQueue<BOT_msgWS> ReceiveMessage_Queue = new ConcurrentQueue<BOT_msgWS>();
         public static List<BOT_LIST> BOTList_WebSocket = new List<BOT_LIST>();
+
         private static readonly Dictionary<string, string> replacements = new Dictionary<string, string>
         {
             { "&amp;", "&" },
@@ -123,11 +132,13 @@ namespace BOT_API_List
         {
             string json = JsonConvert.SerializeObject(obj, Formatting.Indented);
             //SendMessage_Queue.Enqueue(Encoding.UTF8.GetBytes(json));
-            WebSocket.SendAsync(new ArraySegment<byte>(Encoding.UTF8.GetBytes(json)), WebSocketMessageType.Text, true, CancellationToken.None);
-            if (MySvrForm.mForm.checkBox_BOTAPIMSG.Checked)
+            // WebSocket.SendAsync(new ArraySegment<byte>(Encoding.UTF8.GetBytes(json)), WebSocketMessageType.Text, true, CancellationToken.None);
+            BOT_sendlist bOT_Sendlist = new BOT_sendlist
             {
-                MySvrForm.BOT_LoglistADD("BOT", "BOT", "BOT", "原始消息(发)", json);
-            }
+                message = Encoding.UTF8.GetBytes(json),
+                _WebSocket = WebSocket
+            };
+            SendMessage_Queue.Enqueue(bOT_Sendlist);
         }
 
         internal static string CQ_at_Member(string QQ)
@@ -370,7 +381,7 @@ namespace BOT_API_List
             Bot_SendMsg(json, WebSocket);
         }
 
-        internal static void Get_friend_list( WebSocket WebSocket)
+        internal static void Get_friend_list(WebSocket WebSocket)
         {
             var json = new
             {
@@ -380,7 +391,7 @@ namespace BOT_API_List
             Bot_SendMsg(json, WebSocket);
         }
 
-        internal static void Get_group_list( WebSocket WebSocket)
+        internal static void Get_group_list(WebSocket WebSocket)
         {
             var json = new
             {
@@ -390,14 +401,14 @@ namespace BOT_API_List
             Bot_SendMsg(json, WebSocket);
         }
 
-        internal static void Clean_cache( WebSocket WebSocket)
+        internal static void Clean_cache(WebSocket WebSocket)
         {
             var json = new
             {
                 action = "clean_cache",
                 echo = "清理缓存",
             };
-            Bot_SendMsg(json,  WebSocket);
+            Bot_SendMsg(json, WebSocket);
         }
 
         internal static void Send_group_JSON(string group_id, string JSONstring, WebSocket WebSocket)
@@ -446,7 +457,7 @@ namespace BOT_API_List
             Bot_SendMsg(json, WebSocket);
         }
 
-        internal static void Get_QQstatus( WebSocket WebSocket)
+        internal static void Get_QQstatus(WebSocket WebSocket)
         {
             var json = new
             {
@@ -557,7 +568,7 @@ namespace BOT_API_List
                 }
             };
             sendint++;
-            Bot_SendMsg(json,  WebSocket);
+            Bot_SendMsg(json, WebSocket);
         }
 
         internal static void Get_cookies(string domain, WebSocket WebSocket)

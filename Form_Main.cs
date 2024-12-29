@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.Threading;
 using System.Windows.Forms;
 using MessageBox = System.Windows.Forms.MessageBox;
 using Point = System.Drawing.Point;
@@ -18,10 +19,7 @@ namespace WindowsFormsApp1
         private WebSocketServer WebSocketServer = null;
         private int indexBOXLOG = -1;
         private int Itemsindex = -1;
-        private int SVRindex = -1;
-        private int PlayerViListItemsindex = -1;
-        private int RoomViListItemsindex = -1;
-        private int userItemsindex = -1;
+        public static object obj = new object();
 
         public void WebSocketServerAsync(int port)
         {
@@ -45,40 +43,51 @@ namespace WindowsFormsApp1
         }
 
         public delegate void AppendTextDelegate(System.Windows.Forms.ListViewItem item1);
-
-        //BOT日志列表
-        public static void BOT_LoglistADD(string group_name, string group_id, string user_id, string user_name, string msg)
+        public static void BOT_Log(LOGdata data)
         {
-            DateTime now = DateTime.Now;
-            string timeString = now.ToString("HH:mm:ss");
-            System.Windows.Forms.ListViewItem item1 = new System.Windows.Forms.ListViewItem(
-                new[] {
-                    timeString,
-                    group_name,
-                    group_id,
-                    user_id,
-                    user_name,
-                    msg
-                });
-            Color txtColor1 = new Color();
-            txtColor1 = Color.FromArgb(0, 39, 37, 39);
-            item1.BackColor = txtColor1;
-            item1.ForeColor = Color.Cyan;
-            void UpdateLog() => mForm.BOTlist.Items.Add(item1);
-            mForm.BOTlist.Invoke(new Action(UpdateLog));
-            mForm.indexBOXLOG++;
-            if (mForm.indexBOXLOG > 15)
+            lock (obj)
             {
-                void UpEnsureVisible() => mForm.BOTlist.EnsureVisible(mForm.BOTlist.Items.Count - 1);
-                mForm.BOTlist.Invoke(new Action(UpEnsureVisible));
-            }
+                DateTime now = DateTime.Now;
+                string time = now.ToString("HH:mm:ss");
+                System.Windows.Forms.ListViewItem item1 = new System.Windows.Forms.ListViewItem(
+                    new[] {
+                    time,
+                    data.a,
+                    data.b,
+                    data.c,
+                    data.d,
+                    data.e
+                    });
+                Color txtColor1 = new Color();
+                txtColor1 = Color.FromArgb(0, 39, 37, 39);
+                item1.BackColor = txtColor1;
+                item1.ForeColor = Color.Cyan;
+                void UpdateLog() => mForm.BOTlist.Items.Add(item1);
+                mForm.BOTlist.Invoke(new Action(UpdateLog));
+                mForm.indexBOXLOG++;
+                if (mForm.indexBOXLOG > 15)
+                {
+                    void UpEnsureVisible() => mForm.BOTlist.EnsureVisible(mForm.BOTlist.Items.Count - 1);
+                    mForm.BOTlist.Invoke(new Action(UpEnsureVisible));
+                }
 
-            if (mForm.indexBOXLOG >= 1000)
-            {
-                mForm.indexBOXLOG = -1;
-                void UpClear() => mForm.BOTlist.Items.Clear();
-                mForm.BOTlist.Invoke(new Action(UpClear));
+                if (mForm.indexBOXLOG >= 1000)
+                {
+                    mForm.indexBOXLOG = -1;
+                    void UpClear() => mForm.BOTlist.Items.Clear();
+                    mForm.BOTlist.Invoke(new Action(UpClear));
+                }
             }
+     
+        }
+        //BOT日志列表
+        public static void BOT_LoglistADD(LOGdata data)
+        {
+            Thread th = new Thread(() =>
+            {
+                BOT_Log(data);
+            });
+            th.Start();
         }
 
         public static void BOT_group_member_ListViewADD(List<group_member> member_List)
@@ -270,35 +279,14 @@ namespace WindowsFormsApp1
         }
 
         //退出远程桌面时也保持交互，否则无法加载新窗体
-        private void console()
+
+        public class LOGdata 
         {
-            ProcessStartInfo psi = new ProcessStartInfo("cmd.exe", "/c query user")
-            {
-                RedirectStandardOutput = true,
-                UseShellExecute = false,
-                CreateNoWindow = true,   // 创建不显示的窗口
-                WindowStyle = ProcessWindowStyle.Hidden // 隐藏窗口样式
-            };
-            Process process = Process.Start(psi);
-            string ot = process.StandardOutput.ReadToEnd();
-            if (ot.IndexOf("运行中") != -1)
-            {
-                string s = ot.Substring(ot.IndexOf("运行中") - 13, 11);
-                s = s.Replace(" ", "");
-                if (s != null)
-                {
-                    string Str = $"tscon {s} /password:* /dest:console";
-                    //Process.Start("cmd.exe", "/c " + Str);
-                    ProcessStartInfo pcmd = new ProcessStartInfo("cmd.exe", "/c " + Str)
-                    {
-                        RedirectStandardOutput = true,
-                        UseShellExecute = false,
-                        CreateNoWindow = true,
-                        WindowStyle = ProcessWindowStyle.Hidden
-                    };
-                    Process.Start(pcmd);
-                }
-            }
+            public string a;
+            public string b;
+            public string c;
+            public string d;
+            public string e;
         }
     }
 }

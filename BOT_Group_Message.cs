@@ -1,5 +1,6 @@
 ﻿using BOT_ReceiveMsg_T;
 using WindowsFormsApp1;
+using static WindowsFormsApp1.MySvrForm;
 
 namespace GroupMessageDealWith
 {
@@ -8,7 +9,15 @@ namespace GroupMessageDealWith
     {
         public static void Group_Message(MsgData Data)
         {
-            MySvrForm.BOT_LoglistADD(Get_Group_name(Data.group_id), "BOT:" + Data.self_id, Data.nickname, Data.user_id, Data.raw_message);
+            LOGdata lOGdata = new LOGdata
+            {
+                a = Get_Group_name(Data.group_id),
+                b = "账号:" + Data.self_id,
+                c = Data.nickname,
+                d = Data.user_id,
+                e = Data.raw_message
+            };
+            MySvrForm.BOT_LoglistADD(lOGdata);
             if (Data.self_id == Data.user_id)//bot自身消息不处理
             {
                 return;

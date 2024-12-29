@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using WindowsFormsApp1;
+using static WindowsFormsApp1.MySvrForm;
 
 namespace BOT_API_List
 {
@@ -33,6 +34,8 @@ namespace BOT_API_List
             {
                 if (BOT_API.ReceiveMessage_Queue.Count > 0)
                 {
+                    
+
                     try
                     {
                         if (BOT_API.ReceiveMessage_Queue.TryDequeue(out BOT_msgWS result))
@@ -43,7 +46,15 @@ namespace BOT_API_List
                     }
                     catch (Exception ex)
                     {
-                        MySvrForm.BOT_LoglistADD("BOT", "BOT", "BOT", "处理异常", $"{ex.Message}\n\n{ex.StackTrace}");
+                        LOGdata lOGdata = new LOGdata
+                        {
+                            a = "消息处理异常",
+                            b = "消息处理异常",
+                            c = "消息处理异常",
+                            d = "消息处理异常",
+                            e = $"{ex.Message}\n\n{ex.StackTrace}"
+                        };
+                        MySvrForm.BOT_LoglistADD(lOGdata);
                     }
                 }
                 await Task.Delay(10);
@@ -68,7 +79,15 @@ namespace BOT_API_List
                 }
                 catch (Exception ex)
                 {
-                    MySvrForm.BOT_LoglistADD("BOT", "BOT", "BOT", "发送异常", $"{ex.Message}\n\n{ex.StackTrace}");
+                    LOGdata lOGdata = new LOGdata
+                    {
+                        a = "消息发送异常",
+                        b = "消息发送异常",
+                        c = "消息发送异常",
+                        d = "消息发送异常",
+                        e = $"{ex.Message}\n\n{ex.StackTrace}"
+                    };
+                    MySvrForm.BOT_LoglistADD(lOGdata);
                     delayTime = 10;
                 }
                 await Task.Delay(delayTime);

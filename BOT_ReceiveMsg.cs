@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Net.WebSockets;
 using WindowsFormsApp1;
+using static WindowsFormsApp1.MySvrForm;
 
 namespace BOT_ReceiveMsg_T
 {
@@ -57,7 +58,13 @@ namespace BOT_ReceiveMsg_T
             string eventType = GetEventType(jsonObject);// 获取事件类型
             if (eventType == null)
             {
-                MySvrForm.BOT_LoglistADD("BOT:" + data.Self_ID, "BOT:" + data.Self_ID, "BOT:" + data.Self_ID, "未解析类型", data.message);
+                LOGdata lOGdata = new LOGdata();
+                lOGdata.a = "BOT:" + data.Self_ID;
+                lOGdata.b = "BOT:" + data.Self_ID;
+                lOGdata.c = "BOT:" + data.Self_ID;
+                lOGdata.d = "未解析类型:";
+                lOGdata.e = data.message;
+                BOT_LoglistADD(lOGdata);
                 return;
             }
 
@@ -106,7 +113,13 @@ namespace BOT_ReceiveMsg_T
             {
                 case "lifecycle":
                     string self_id = jsonObject.self_id.ToString();
-                    MySvrForm.BOT_LoglistADD("BOT:" + self_id, "BOT:" + self_id, "BOT:" + self_id, "已登录", jsonObject.ToString());
+                    LOGdata lOGdata = new LOGdata();
+                    lOGdata.a = "账号:" + self_id;
+                    lOGdata.b = "账号:" + self_id;
+                    lOGdata.c = "账号:" + self_id;
+                    lOGdata.d = "已登录";
+                    lOGdata.e = jsonObject.ToString();
+                    BOT_LoglistADD(lOGdata);
                     BOT_API.Get_QQ_info(data._WebSocket);
                     BOT_API.Get_version_LLoneBot(data._WebSocket);
                     BOT_API.Get_friend_list(data._WebSocket);
@@ -118,7 +131,7 @@ namespace BOT_ReceiveMsg_T
                     break;
 
                 default:
-                    MySvrForm.BOT_LoglistADD("BOT:" + data.Self_ID, "BOT:" + data.Self_ID, "BOT:" + data.Self_ID, "未解析类型", jsonObject.ToString());
+                  
                     break;
             }
         }
@@ -171,7 +184,7 @@ namespace BOT_ReceiveMsg_T
                     break;
 
                 default:
-                    MySvrForm.BOT_LoglistADD("BOT:" + data.Self_ID, "BOT:" + data.Self_ID, "BOT:" + data.Self_ID, "未解析事件", jsonObject.ToString());
+                 
                     break;
             }
         }
@@ -187,12 +200,8 @@ namespace BOT_ReceiveMsg_T
                     }
                     break;
 
-                case "group_upload":
-                    MySvrForm.BOT_LoglistADD(Get_Group_name(json.group_id.ToString()), json.group_id.ToString(), json.user_id.ToString(), "收到群文件", $"成员 {json.user_id.ToString()} 上传群文件\n文件ID: {json.file.id.ToString()}\n文件名: {json.file.name.ToString()}");
-                    break;
-
                 default:
-                    MySvrForm.BOT_LoglistADD(Get_Group_name(json.group_id.ToString()), json.group_id.ToString(), json.user_id.ToString(), "未解析事件", json.ToString());
+              
                     break;
             }
         }
@@ -212,38 +221,71 @@ namespace BOT_ReceiveMsg_T
         //临时会话
         private static void NOfriend_message(MsgData private_Data)
         {
-            MySvrForm.BOT_LoglistADD("BOT:" + private_Data.self_id, "收到临时消息", private_Data.user_id.ToString(), private_Data.nickname.ToString(), private_Data.raw_message.ToString());
+            LOGdata lOGdata = new LOGdata();
+            lOGdata.a = private_Data.nickname;
+            lOGdata.b = private_Data.user_id;
+            lOGdata.c = "账号:" + private_Data.self_id;
+            lOGdata.d = "收到临时消息";
+            lOGdata.e = private_Data.raw_message;
+            MySvrForm.BOT_LoglistADD(lOGdata);
         }
 
         //好友会话
         private static void Friend_message(MsgData private_Data)
         {
-            MySvrForm.BOT_LoglistADD("BOT:" + private_Data.self_id, "收到好友消息", private_Data.user_id.ToString(), private_Data.nickname.ToString(), private_Data.raw_message.ToString());
+            LOGdata lOGdata = new LOGdata();
+            lOGdata.a = private_Data.nickname;
+            lOGdata.b = private_Data.user_id;
+            lOGdata.c = "账号:" + private_Data.self_id;
+            lOGdata.d = "收到临时消息";
+            lOGdata.e = private_Data.raw_message;
+            MySvrForm.BOT_LoglistADD(lOGdata);
         }
 
         //api结果
         private static void BOT_API_ECHO(dynamic jsonObject, BOT_msgWS data)
         {
             string echo = jsonObject.echo;
+            LOGdata lOGdata = new LOGdata();
             switch (echo)
             {
-                case "info":
-                    MySvrForm.BOT_LoglistADD("BOT:" + data.Self_ID, "登录成功", (string)jsonObject.data.user_id, (string)jsonObject.data.nickname, jsonObject.ToString());
+                case "info":                  
+                    lOGdata.a = "昵称:" + (string)jsonObject.data.nickname;
+                    lOGdata.b = "账号:" + data.Self_ID;
+                    lOGdata.c = "账号:" + data.Self_ID;
+                    lOGdata.d = "登录成功";
+                    lOGdata.e = jsonObject.ToString();
+                    BOT_LoglistADD(lOGdata);
                     break;
 
                 case "friendlist":
                     if (jsonObject.status != "ok")
                     {
-                        MySvrForm.BOT_LoglistADD("BOT:" + data.Self_ID, "BOT:" + data.Self_ID, "需重启QQ", "获取好友失败", jsonObject);
+                        lOGdata.a = "账号:" + data.Self_ID;
+                        lOGdata.b = "账号:" + data.Self_ID;
+                        lOGdata.c = "账号:" + data.Self_ID;
+                        lOGdata.d = "需重启QQ";
+                        lOGdata.e = jsonObject.ToString();
+                        MySvrForm.BOT_LoglistADD(lOGdata);
                         break;
                     }
-                    MySvrForm.BOT_LoglistADD("BOT:" + data.Self_ID, "登录成功", "获取好友", "好友:" + jsonObject.data.Count, jsonObject.ToString());
+                    lOGdata.a = "账号:" + data.Self_ID;
+                    lOGdata.b = "账号:" + data.Self_ID;
+                    lOGdata.c = "获取好友";
+                    lOGdata.d = "好友:" + jsonObject.data.Count;
+                    lOGdata.e = jsonObject.ToString();
+                    BOT_LoglistADD(lOGdata);
                     break;
 
                 case "grouplist":
                     if (jsonObject.status != "ok")
                     {
-                        MySvrForm.BOT_LoglistADD("BOT:" + data.Self_ID, "BOT:" + data.Self_ID, "需重启QQ", "获取群失败", jsonObject.ToString());
+                        lOGdata.a = "账号:" + data.Self_ID;
+                        lOGdata.b = "账号:" + data.Self_ID;
+                        lOGdata.c = "获取好友";
+                        lOGdata.d = "需重启QQ";
+                        lOGdata.e = jsonObject.ToString();
+                        BOT_LoglistADD(lOGdata);
                         break;
                     }
                     for (int i = 0; i < jsonObject.data.Count; i++)
@@ -255,13 +297,23 @@ namespace BOT_ReceiveMsg_T
                         };
                         Group_List.Add(List);
                     }
-                    MySvrForm.BOT_LoglistADD("BOT:" + data.Self_ID, "登录成功", "获取群聊", "群聊:" + jsonObject.data.Count, jsonObject.ToString());
+                    lOGdata.a = "账号:" + data.Self_ID;
+                    lOGdata.b = "账号:" + data.Self_ID;
+                    lOGdata.c = "获取群聊";
+                    lOGdata.d = "群聊:" + jsonObject.data.Count;
+                    lOGdata.e = jsonObject.ToString();
+                    BOT_LoglistADD(lOGdata);
                     break;
 
                 case "group_member_list":
                     if (jsonObject.status != "ok")
                     {
-                        MySvrForm.BOT_LoglistADD("BOT:" + data.Self_ID, "BOT:" + data.Self_ID, "需重启QQ", "获取群失败", jsonObject.ToString());
+                        lOGdata.a = "账号:" + data.Self_ID;
+                        lOGdata.b = "账号:" + data.Self_ID;
+                        lOGdata.c = "账号:" + data.Self_ID;
+                        lOGdata.d = "获取成员失败" ;
+                        lOGdata.e = jsonObject.ToString();
+                        BOT_LoglistADD(lOGdata);
                         break;
                     }
                     group_member_List.Clear();
@@ -304,25 +356,45 @@ namespace BOT_ReceiveMsg_T
                 case "status":
                     if (!(bool)jsonObject.data.good || !(bool)jsonObject.data.online)
                     {
-                        MySvrForm.BOT_LoglistADD("BOT:" + data.Self_ID, "BOT:" + data.Self_ID, "BOT:" + data.Self_ID, "状态异常", jsonObject.ToString());
+                        lOGdata.a = "账号:" + data.Self_ID;
+                        lOGdata.b = "账号:" + data.Self_ID;
+                        lOGdata.c = "账号:" + data.Self_ID;
+                        lOGdata.d = "状态异常";
+                        lOGdata.e = jsonObject.ToString();
+                        BOT_LoglistADD(lOGdata);
                     }
 
                     break;
 
                 case "get_msg":
                     string _messag = BOT_API.Msg_Replace(jsonObject.data.raw_message.ToString());
-                    MySvrForm.BOT_LoglistADD(Get_Group_name(jsonObject.data.group_id.ToString()), jsonObject.data.group_id.ToString(), jsonObject.data.user_id.ToString(), "撤回一条消息", _messag);
+                    lOGdata.a = Get_Group_name(jsonObject.data.group_id.ToString());
+                    lOGdata.b = jsonObject.data.group_id.ToString();
+                    lOGdata.c = jsonObject.data.user_id.ToString();
+                    lOGdata.d = "撤回一条消息";
+                    lOGdata.e = _messag;
+                    BOT_LoglistADD(lOGdata);
                     break;
 
                 case "send_group_msg":
                     if (jsonObject.status != "ok")
                     {
-                        MySvrForm.BOT_LoglistADD("BOT:" + data.Self_ID, "BOT:" + data.Self_ID, "BOT:" + data.Self_ID, "发送失败", jsonObject.ToString());
+                        lOGdata.a = "账号:" + data.Self_ID;
+                        lOGdata.b = "账号:" + data.Self_ID;
+                        lOGdata.c = "账号:" + data.Self_ID;
+                        lOGdata.d = "消息发送失败";
+                        lOGdata.e = jsonObject.ToString();
+                        BOT_LoglistADD(lOGdata);
                     }
                     break;
 
                 default:
-                    MySvrForm.BOT_LoglistADD("BOT:" + data.Self_ID, "BOT:" + data.Self_ID, "BOT:" + data.Self_ID, echo, jsonObject.ToString());
+                    lOGdata.a = "账号:" + data.Self_ID;
+                    lOGdata.b = "账号:" + data.Self_ID;
+                    lOGdata.c = "账号:" + data.Self_ID;
+                    lOGdata.d = echo;
+                    lOGdata.e = jsonObject.ToString();
+                    BOT_LoglistADD(lOGdata);
                     break;
             }
         }
@@ -330,37 +402,66 @@ namespace BOT_ReceiveMsg_T
         //事件上报
         private static void BOT_sub_type(dynamic json, BOT_msgWS data)
         {
+            LOGdata lOGdata = new LOGdata();
             switch (json.sub_type.ToString())
             {
                 case "approve": // 新人进入群聊
-                    MySvrForm.BOT_LoglistADD(Get_Group_name(json.group_id.ToString()), json.group_id.ToString(), "BOT:" + data.Self_ID, "新人进群", $"{json.user_id.ToString()} 进入群聊");
-
+                   
+                    lOGdata.a = Get_Group_name(json.group_id.ToString());
+                    lOGdata.b = json.group_id.ToString();
+                    lOGdata.c = "账号:" + data.Self_ID;
+                    lOGdata.d = "新人进群";
+                    lOGdata.e = $"{json.user_id.ToString()} 进入群聊";
+                    BOT_LoglistADD(lOGdata);
                     break;
 
                 case "leave": // 退群人
-
-                    MySvrForm.BOT_LoglistADD(Get_Group_name(json.group_id.ToString()), json.group_id.ToString(), "BOT:" + data.Self_ID, "有人退群", json.ToString());
+                    lOGdata.a = Get_Group_name(json.group_id.ToString());
+                    lOGdata.b = json.group_id.ToString();
+                    lOGdata.c = "账号:" + data.Self_ID;
+                    lOGdata.d = "有人退群";
+                    lOGdata.e = json.ToString();
+                    BOT_LoglistADD(lOGdata);
                     break;
 
                 case "add":
-
-                    MySvrForm.BOT_LoglistADD(Get_Group_name(json.group_id.ToString()), json.group_id.ToString(), "BOT:" + data.Self_ID, "申请入群", json.ToString());
+                    lOGdata.a = Get_Group_name(json.group_id.ToString());
+                    lOGdata.b = json.group_id.ToString();
+                    lOGdata.c = "账号:" + data.Self_ID;
+                    lOGdata.d = "申请入群";
+                    lOGdata.e = json.ToString();
+                    BOT_LoglistADD(lOGdata);
                     break;
 
                 case "ban":
-                    MySvrForm.BOT_LoglistADD(Get_Group_name(json.group_id.ToString()), json.group_id.ToString(), "BOT:" + data.Self_ID, "禁言", $"{json.user_id.ToString()} 被 {json.operator_id.ToString()} 禁言 {json.duration.ToString()}秒");
+                    lOGdata.a = Get_Group_name(json.group_id.ToString());
+                    lOGdata.b = json.group_id.ToString();
+                    lOGdata.c = "账号:" + data.Self_ID;
+                    lOGdata.d = "禁言";
+                    lOGdata.e = $"{json.user_id.ToString()} 被 {json.operator_id.ToString()} 禁言 {json.duration.ToString()}秒";
+                    BOT_LoglistADD(lOGdata);
                     break;
 
                 case "lift_ban":
-                    MySvrForm.BOT_LoglistADD(Get_Group_name(json.group_id.ToString()), json.group_id.ToString(), "BOT:" + data.Self_ID, "解除禁言", $"{json.user_id.ToString()} 被 {json.operator_id.ToString()} 解除禁言");
+                    lOGdata.a = Get_Group_name(json.group_id.ToString());
+                    lOGdata.b = json.group_id.ToString();
+                    lOGdata.c = "账号:" + data.Self_ID;
+                    lOGdata.d = "解除禁言";
+                    lOGdata.e = $"{json.user_id.ToString()} 被 {json.operator_id.ToString()} 解除禁言";
+                    BOT_LoglistADD(lOGdata);
                     break;
 
                 case "kick":
-                    MySvrForm.BOT_LoglistADD(Get_Group_name(json.group_id.ToString()), json.group_id.ToString(), json.operator_id.ToString(), "踢出群聊", $"{json.user_id.ToString()} 被 {json.operator_id.ToString()} 踢出群聊");
+                    lOGdata.a = Get_Group_name(json.group_id.ToString());
+                    lOGdata.b = json.group_id.ToString();
+                    lOGdata.c = "账号:" + data.Self_ID;
+                    lOGdata.d = "踢出群聊";
+                    lOGdata.e = $"{json.user_id.ToString()} 被 {json.operator_id.ToString()} 踢出群聊";
+                    MySvrForm.BOT_LoglistADD(lOGdata);
                     break;
 
                 default:
-                    MySvrForm.BOT_LoglistADD("BOT:" + data.Self_ID, "BOT:" + data.Self_ID, "BOT:" + data.Self_ID, "未解析事件", json.ToString());
+                  
                     break;
             }
         }

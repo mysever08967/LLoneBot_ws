@@ -212,10 +212,7 @@ namespace WindowsFormsApp1
             BOT_Exit();
         }
 
-        private void group_set_Click(object sender, EventArgs e)
-        {
-            TabListGmaneSet.SelectedTab = TabListGmaneSet.TabPages[2];
-        }
+
 
         private void BOT_set_Click(object sender, EventArgs e)
         {
@@ -287,7 +284,7 @@ namespace WindowsFormsApp1
             Clipboard.SetText(selectedItem.SubItems[5].Text);
         }
 
-        //退出远程桌面时也保持交互，否则无法加载新窗体
+
 
         public class LOGdata 
         {

@@ -29,19 +29,15 @@ internal class WebSocketServer
         catch
         {
             MySvrForm.mForm.openWS = false;
-            MessageBox.Show($"{port}:开启失败,请检查端口是否开放");
+            MessageBox.Show($"{url}   开启失败,请检查端口是否开放");
             return;
         }
         wsURL = url;
-        //异步 消息收发处理队列
-        //BOTMsg = new BOTMsgQueue();
-        //BOTMsg.Msgstart();
-        //BOTMsg.sendstart();
         LOGdata lOGdata = new LOGdata
         {
-            a = "WebSocket",
-            b = "WebSocket",
-            c = "WebSocket",
+            a = "WebSocketSever",
+            b = "WebSocketSever",
+            c = "WebSocketSever",
             d = "Start",
             e = wsURL
         };
@@ -73,6 +69,15 @@ internal class WebSocketServer
             }
             catch (Exception)
             {
+                LOGdata la = new LOGdata
+                {
+                    a = "WebSocketSever",
+                    b = "WebSocketSever",
+                    c = "WebSocketSever",
+                    d = "Stop",
+                    e = wsURL
+                };
+                MySvrForm.BOT_LoglistADD(la);
             }
         }
     }

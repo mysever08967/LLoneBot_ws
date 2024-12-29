@@ -62,8 +62,7 @@ namespace WindowsFormsApp1
 
         public void InStart()
         {
-            mForm.BOTlist.Items.Clear();
-            mForm.TabListGmaneSet.SelectedTab = mForm.TabListGmaneSet.TabPages[1];
+            mForm.TabListGmaneSet.SelectedTab = mForm.TabListGmaneSet.TabPages[0];
             mForm.TabListGmaneSet.SetBounds(135, 20, 772, 452);
             mForm.SetBounds(50, 50, 900, 450);
         }
@@ -200,12 +199,16 @@ namespace WindowsFormsApp1
 
         private void button_WS_start_Click(object sender, EventArgs e)
         {
+            if (!openWS)
+            {
+                WebSocketServer = null;
+            }
             if (WebSocketServer != null)
             {
                 MessageBox.Show("WebSocketSever: 运行中");
                 return;
             }
-            if (Tbox_wsProt.Text == null)
+            if (Tbox_wsProt.Text == "")
             {
                 return;
             }
@@ -221,7 +224,6 @@ namespace WindowsFormsApp1
         {
             openWS = false;
             List_Self_Client.Clear();
-            MessageBox.Show("WebSocketSever: 已关闭");
             if (WebSocketServer == null)
                 return;
             WebSocketServer.stop();
@@ -238,10 +240,7 @@ namespace WindowsFormsApp1
             BOT_Exit();
         }
 
-        private void BOT_set_Click(object sender, EventArgs e)
-        {
-            TabListGmaneSet.SelectedTab = TabListGmaneSet.TabPages[1];
-        }
+
 
         private void button2_Click(object sender, EventArgs e)
         {

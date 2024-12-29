@@ -16,8 +16,6 @@ namespace WindowsFormsApp1
 
         //protected internal new System.Windows.Forms.ColumnHeader Name;
 
-        private System.Windows.Forms.Button BOT_set;
-
         private System.Windows.Forms.ContextMenuStrip BOTLOGcontextMenuStrip;
 
         private System.Windows.Forms.Button butExit;
@@ -118,7 +116,6 @@ namespace WindowsFormsApp1
             this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ButLog = new System.Windows.Forms.Button();
-            this.BOT_set = new System.Windows.Forms.Button();
             this.Exit = new System.Windows.Forms.Button();
             this.butExit = new System.Windows.Forms.Button();
             this.butXH = new System.Windows.Forms.Button();
@@ -129,21 +126,9 @@ namespace WindowsFormsApp1
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
-            this.全局屏蔽ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.指定死亡ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.获取状态ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.拉黑IPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.拉黑名单ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.踢出客户端ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.获取状态全部玩家ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripMenuItem();
-            this.增加人数ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.修改房名ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.label_Revsend = new System.Windows.Forms.Label();
-            this.BotVer = new System.Windows.Forms.Label();
-            this.BOTSET = new System.Windows.Forms.TabPage();
             this.Tbox_wsProt = new System.Windows.Forms.TextBox();
             this.WS_stop = new System.Windows.Forms.Button();
             this.button_WS_start = new System.Windows.Forms.Button();
@@ -166,51 +151,24 @@ namespace WindowsFormsApp1
             // 
             // button2
             // 
-            this.button2.CausesValidation = false;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.ForeColor = System.Drawing.Color.Cyan;
-            this.button2.Location = new System.Drawing.Point(482, 388);
+            this.button2.Location = new System.Drawing.Point(0, 0);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(70, 25);
-            this.button2.TabIndex = 19;
-            this.button2.TabStop = false;
-            this.button2.Text = "确定";
-            this.button2.UseVisualStyleBackColor = false;
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 0;
             // 
             // label5
             // 
-            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(37)))), ((int)(((byte)(39)))));
-            this.label5.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.label5.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label5.ForeColor = System.Drawing.Color.Cyan;
-            this.label5.Location = new System.Drawing.Point(167, 394);
+            this.label5.Location = new System.Drawing.Point(0, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(71, 19);
-            this.label5.TabIndex = 18;
-            this.label5.Text = "选择群聊:";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label5.Size = new System.Drawing.Size(100, 23);
+            this.label5.TabIndex = 0;
             // 
             // G_USERBOX
             // 
-            this.G_USERBOX.AutoCompleteCustomSource.AddRange(new string[] {
-            "[群聊] 尚不设置",
-            "[群聊] 设置",
-            "[群聊] 尚不设置",
-            "[群聊] 设置",
-            "[群聊] 尚不设置",
-            "[群聊] 设置"});
-            this.G_USERBOX.BackColor = System.Drawing.Color.MintCream;
-            this.G_USERBOX.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.G_USERBOX.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.G_USERBOX.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.G_USERBOX.FormattingEnabled = true;
-            this.G_USERBOX.Location = new System.Drawing.Point(244, 389);
+            this.G_USERBOX.Location = new System.Drawing.Point(0, 0);
             this.G_USERBOX.Name = "G_USERBOX";
-            this.G_USERBOX.Size = new System.Drawing.Size(232, 22);
-            this.G_USERBOX.TabIndex = 17;
+            this.G_USERBOX.Size = new System.Drawing.Size(121, 20);
+            this.G_USERBOX.TabIndex = 0;
             // 
             // group_member_ListView
             // 
@@ -220,47 +178,6 @@ namespace WindowsFormsApp1
             this.group_member_ListView.Size = new System.Drawing.Size(121, 97);
             this.group_member_ListView.TabIndex = 0;
             this.group_member_ListView.UseCompatibleStateImageBehavior = false;
-            // 
-            // columnHeader1
-            // 
-            this.columnHeader1.Text = "    QQ";
-            this.columnHeader1.Width = 80;
-            // 
-            // columnHeader2
-            // 
-            this.columnHeader2.Text = "QQ昵称";
-            this.columnHeader2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.columnHeader2.Width = 100;
-            // 
-            // columnHeader3
-            // 
-            this.columnHeader3.Text = "群昵称";
-            this.columnHeader3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.columnHeader3.Width = 100;
-            // 
-            // columnHeader4
-            // 
-            this.columnHeader4.Text = "群身份";
-            this.columnHeader4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.columnHeader4.Width = 50;
-            // 
-            // columnHeader5
-            // 
-            this.columnHeader5.Text = "进群时间";
-            this.columnHeader5.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.columnHeader5.Width = 150;
-            // 
-            // columnHeader6
-            // 
-            this.columnHeader6.Text = "最后发言时间";
-            this.columnHeader6.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.columnHeader6.Width = 150;
-            // 
-            // columnHeader7
-            // 
-            this.columnHeader7.Text = "签到积分";
-            this.columnHeader7.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.columnHeader7.Width = 100;
             // 
             // ButLog
             // 
@@ -277,27 +194,12 @@ namespace WindowsFormsApp1
             this.ButLog.UseVisualStyleBackColor = false;
             this.ButLog.Click += new System.EventHandler(this.ButLog_Click);
             // 
-            // BOT_set
-            // 
-            this.BOT_set.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
-            this.BOT_set.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BOT_set.ForeColor = System.Drawing.Color.Cyan;
-            this.BOT_set.Location = new System.Drawing.Point(10, 166);
-            this.BOT_set.Margin = new System.Windows.Forms.Padding(0);
-            this.BOT_set.Name = "BOT_set";
-            this.BOT_set.Size = new System.Drawing.Size(120, 24);
-            this.BOT_set.TabIndex = 13;
-            this.BOT_set.TabStop = false;
-            this.BOT_set.Text = "设置";
-            this.BOT_set.UseVisualStyleBackColor = false;
-            this.BOT_set.Click += new System.EventHandler(this.BOT_set_Click);
-            // 
             // Exit
             // 
             this.Exit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
             this.Exit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Exit.ForeColor = System.Drawing.Color.Cyan;
-            this.Exit.Location = new System.Drawing.Point(10, 200);
+            this.Exit.Location = new System.Drawing.Point(12, 411);
             this.Exit.Margin = new System.Windows.Forms.Padding(0);
             this.Exit.Name = "Exit";
             this.Exit.Size = new System.Drawing.Size(120, 24);
@@ -384,41 +286,6 @@ namespace WindowsFormsApp1
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
             this.toolStripMenuItem3.Size = new System.Drawing.Size(32, 19);
             // 
-            // 全局屏蔽ToolStripMenuItem
-            // 
-            this.全局屏蔽ToolStripMenuItem.Name = "全局屏蔽ToolStripMenuItem";
-            this.全局屏蔽ToolStripMenuItem.Size = new System.Drawing.Size(32, 19);
-            // 
-            // 指定死亡ToolStripMenuItem
-            // 
-            this.指定死亡ToolStripMenuItem.Name = "指定死亡ToolStripMenuItem";
-            this.指定死亡ToolStripMenuItem.Size = new System.Drawing.Size(32, 19);
-            // 
-            // 获取状态ToolStripMenuItem
-            // 
-            this.获取状态ToolStripMenuItem.Name = "获取状态ToolStripMenuItem";
-            this.获取状态ToolStripMenuItem.Size = new System.Drawing.Size(32, 19);
-            // 
-            // 拉黑IPToolStripMenuItem
-            // 
-            this.拉黑IPToolStripMenuItem.Name = "拉黑IPToolStripMenuItem";
-            this.拉黑IPToolStripMenuItem.Size = new System.Drawing.Size(32, 19);
-            // 
-            // 拉黑名单ToolStripMenuItem
-            // 
-            this.拉黑名单ToolStripMenuItem.Name = "拉黑名单ToolStripMenuItem";
-            this.拉黑名单ToolStripMenuItem.Size = new System.Drawing.Size(32, 19);
-            // 
-            // 踢出客户端ToolStripMenuItem
-            // 
-            this.踢出客户端ToolStripMenuItem.Name = "踢出客户端ToolStripMenuItem";
-            this.踢出客户端ToolStripMenuItem.Size = new System.Drawing.Size(32, 19);
-            // 
-            // 获取状态全部玩家ToolStripMenuItem
-            // 
-            this.获取状态全部玩家ToolStripMenuItem.Name = "获取状态全部玩家ToolStripMenuItem";
-            this.获取状态全部玩家ToolStripMenuItem.Size = new System.Drawing.Size(32, 19);
-            // 
             // toolStripMenuItem4
             // 
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
@@ -433,52 +300,6 @@ namespace WindowsFormsApp1
             // 
             this.toolStripMenuItem6.Name = "toolStripMenuItem6";
             this.toolStripMenuItem6.Size = new System.Drawing.Size(32, 19);
-            // 
-            // 增加人数ToolStripMenuItem
-            // 
-            this.增加人数ToolStripMenuItem.Name = "增加人数ToolStripMenuItem";
-            this.增加人数ToolStripMenuItem.Size = new System.Drawing.Size(32, 19);
-            // 
-            // 修改房名ToolStripMenuItem
-            // 
-            this.修改房名ToolStripMenuItem.Name = "修改房名ToolStripMenuItem";
-            this.修改房名ToolStripMenuItem.Size = new System.Drawing.Size(32, 19);
-            // 
-            // label_Revsend
-            // 
-            this.label_Revsend.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(37)))), ((int)(((byte)(60)))));
-            this.label_Revsend.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.label_Revsend.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label_Revsend.ForeColor = System.Drawing.Color.Cyan;
-            this.label_Revsend.Location = new System.Drawing.Point(0, 372);
-            this.label_Revsend.Name = "label_Revsend";
-            this.label_Revsend.Size = new System.Drawing.Size(140, 15);
-            this.label_Revsend.TabIndex = 56;
-            this.label_Revsend.Text = "收:0  发:0";
-            this.label_Revsend.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // BotVer
-            // 
-            this.BotVer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(37)))), ((int)(((byte)(60)))));
-            this.BotVer.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.BotVer.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.BotVer.ForeColor = System.Drawing.Color.Cyan;
-            this.BotVer.Location = new System.Drawing.Point(0, 404);
-            this.BotVer.Name = "BotVer";
-            this.BotVer.Size = new System.Drawing.Size(140, 15);
-            this.BotVer.TabIndex = 57;
-            this.BotVer.Text = "版本:待获取";
-            this.BotVer.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // BOTSET
-            // 
-            this.BOTSET.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(37)))), ((int)(((byte)(39)))));
-            this.BOTSET.Location = new System.Drawing.Point(4, 4);
-            this.BOTSET.Name = "BOTSET";
-            this.BOTSET.Padding = new System.Windows.Forms.Padding(3);
-            this.BOTSET.Size = new System.Drawing.Size(764, 427);
-            this.BOTSET.TabIndex = 1;
-            this.BOTSET.Text = "框架设置";
             // 
             // Tbox_wsProt
             // 
@@ -612,7 +433,6 @@ namespace WindowsFormsApp1
             // 
             this.TabListGmaneSet.Alignment = System.Windows.Forms.TabAlignment.Bottom;
             this.TabListGmaneSet.Controls.Add(this.tabPage1);
-            this.TabListGmaneSet.Controls.Add(this.BOTSET);
             this.TabListGmaneSet.Cursor = System.Windows.Forms.Cursors.Default;
             this.TabListGmaneSet.ItemSize = new System.Drawing.Size(6, 15);
             this.TabListGmaneSet.Location = new System.Drawing.Point(135, 20);
@@ -645,12 +465,9 @@ namespace WindowsFormsApp1
             this.Controls.Add(this.Tbox_wsProt);
             this.Controls.Add(this.button_WS_start);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.BotVer);
-            this.Controls.Add(this.label_Revsend);
             this.Controls.Add(this.butXH);
             this.Controls.Add(this.butExit);
             this.Controls.Add(this.Exit);
-            this.Controls.Add(this.BOT_set);
             this.Controls.Add(this.ButLog);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.TabListGmaneSet);
@@ -675,9 +492,6 @@ namespace WindowsFormsApp1
 
 
         #endregion
-        protected internal Label label_Revsend;
-        protected internal Label BotVer;
-        private TabPage BOTSET;
         protected internal TextBox Tbox_wsProt;
         private Button WS_stop;
         private Button button_WS_start;
@@ -694,4 +508,3 @@ namespace WindowsFormsApp1
         private PictureBox pictureBox2;
     }
 }
-

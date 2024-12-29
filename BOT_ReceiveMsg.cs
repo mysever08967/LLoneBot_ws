@@ -48,7 +48,7 @@ namespace BOT_ReceiveMsg_T
         public static List<friend_list> friend_List = new List<friend_list>();
         public static List<Group_list> Group_List = new List<Group_list>();
         public static List<string> ADDGroup_List = new List<string>();
-        public static List<string> leaveGroupuser_List = new List<string>();
+
 
         public static void BOT_MessageParsing(BOT_msgWS data)
         {

@@ -159,7 +159,6 @@ namespace WindowsFormsApp1
             this.TabListGmaneSet = new System.Windows.Forms.TabControl();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.BOTLOGcontextMenuStrip.SuspendLayout();
-            this.BOTSET.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.TabListGmaneSet.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -474,10 +473,6 @@ namespace WindowsFormsApp1
             // BOTSET
             // 
             this.BOTSET.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(37)))), ((int)(((byte)(39)))));
-            this.BOTSET.Controls.Add(this.Tbox_wsProt);
-            this.BOTSET.Controls.Add(this.WS_stop);
-            this.BOTSET.Controls.Add(this.button_WS_start);
-            this.BOTSET.Controls.Add(this.label1);
             this.BOTSET.Location = new System.Drawing.Point(4, 4);
             this.BOTSET.Name = "BOTSET";
             this.BOTSET.Padding = new System.Windows.Forms.Padding(3);
@@ -487,12 +482,12 @@ namespace WindowsFormsApp1
             // 
             // Tbox_wsProt
             // 
-            this.Tbox_wsProt.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(37)))), ((int)(((byte)(39)))));
+            this.Tbox_wsProt.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(37)))), ((int)(((byte)(60)))));
             this.Tbox_wsProt.ForeColor = System.Drawing.Color.Aqua;
-            this.Tbox_wsProt.Location = new System.Drawing.Point(78, 143);
+            this.Tbox_wsProt.Location = new System.Drawing.Point(52, 24);
             this.Tbox_wsProt.MaxLength = 5;
             this.Tbox_wsProt.Name = "Tbox_wsProt";
-            this.Tbox_wsProt.Size = new System.Drawing.Size(80, 21);
+            this.Tbox_wsProt.Size = new System.Drawing.Size(70, 21);
             this.Tbox_wsProt.TabIndex = 8;
             this.Tbox_wsProt.TabStop = false;
             this.Tbox_wsProt.Text = "3002";
@@ -506,12 +501,12 @@ namespace WindowsFormsApp1
             this.WS_stop.CausesValidation = false;
             this.WS_stop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.WS_stop.ForeColor = System.Drawing.Color.Cyan;
-            this.WS_stop.Location = new System.Drawing.Point(240, 142);
+            this.WS_stop.Location = new System.Drawing.Point(75, 48);
             this.WS_stop.Name = "WS_stop";
-            this.WS_stop.Size = new System.Drawing.Size(70, 23);
+            this.WS_stop.Size = new System.Drawing.Size(52, 23);
             this.WS_stop.TabIndex = 3;
             this.WS_stop.TabStop = false;
-            this.WS_stop.Text = "BOT_退出";
+            this.WS_stop.Text = "关闭";
             this.WS_stop.UseVisualStyleBackColor = false;
             this.WS_stop.Click += new System.EventHandler(this.WS_stop_Click);
             // 
@@ -521,26 +516,26 @@ namespace WindowsFormsApp1
             this.button_WS_start.CausesValidation = false;
             this.button_WS_start.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button_WS_start.ForeColor = System.Drawing.Color.Cyan;
-            this.button_WS_start.Location = new System.Drawing.Point(164, 142);
+            this.button_WS_start.Location = new System.Drawing.Point(12, 48);
             this.button_WS_start.Name = "button_WS_start";
-            this.button_WS_start.Size = new System.Drawing.Size(70, 23);
+            this.button_WS_start.Size = new System.Drawing.Size(57, 23);
             this.button_WS_start.TabIndex = 1;
             this.button_WS_start.TabStop = false;
-            this.button_WS_start.Text = "BOT_登录";
+            this.button_WS_start.Text = "开启";
             this.button_WS_start.UseVisualStyleBackColor = false;
             this.button_WS_start.Click += new System.EventHandler(this.button_WS_start_Click);
             // 
             // label1
             // 
-            this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(37)))), ((int)(((byte)(39)))));
+            this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(37)))), ((int)(((byte)(60)))));
             this.label1.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.label1.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label1.ForeColor = System.Drawing.Color.Cyan;
-            this.label1.Location = new System.Drawing.Point(19, 147);
+            this.label1.Location = new System.Drawing.Point(-1, 26);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(61, 19);
+            this.label1.Size = new System.Drawing.Size(47, 19);
             this.label1.TabIndex = 11;
-            this.label1.Text = "WS Port:";
+            this.label1.Text = "Port:";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // tabPage1
@@ -646,6 +641,10 @@ namespace WindowsFormsApp1
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(37)))), ((int)(((byte)(39)))));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(900, 478);
+            this.Controls.Add(this.WS_stop);
+            this.Controls.Add(this.Tbox_wsProt);
+            this.Controls.Add(this.button_WS_start);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.BotVer);
             this.Controls.Add(this.label_Revsend);
             this.Controls.Add(this.butXH);
@@ -666,12 +665,11 @@ namespace WindowsFormsApp1
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MySeverForm_MouseMove);
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.MySeverForm_Mouseup);
             this.BOTLOGcontextMenuStrip.ResumeLayout(false);
-            this.BOTSET.ResumeLayout(false);
-            this.BOTSET.PerformLayout();
             this.tabPage1.ResumeLayout(false);
             this.TabListGmaneSet.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 

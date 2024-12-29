@@ -3,14 +3,7 @@ using WindowsFormsApp1;
 
 namespace GroupMessageDealWith
 {
-    public class UserMsgADD
-    {
-        public string user_id;
-        public string group_id;
-        public string msg;
-        public string msg_id;
-    }
-
+ 
     internal class BotMessage : BOT_ReceiveMsg
     {
         public static void Group_Message(MsgData Data)

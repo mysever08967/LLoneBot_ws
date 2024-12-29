@@ -98,14 +98,11 @@ namespace BOT_API_List
 
     internal class BOT_API
     {
-        public static bool severstart = false;
         public static int Revint;
         public static int sendint;
-        public static WebSocket botWebSocket = null;
         public static ConcurrentQueue<BOT_sendlist> SendMessage_Queue = new ConcurrentQueue<BOT_sendlist>();
         public static ConcurrentQueue<BOT_msgWS> ReceiveMessage_Queue = new ConcurrentQueue<BOT_msgWS>();
         public static List<BOT_LIST> BOTList_WebSocket = new List<BOT_LIST>();
-
         private static readonly Dictionary<string, string> replacements = new Dictionary<string, string>
         {
             { "&amp;", "&" },

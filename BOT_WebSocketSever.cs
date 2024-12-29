@@ -19,11 +19,6 @@ internal class WebSocketServer
     public async void Start(int port)
     {
         string url = $"http://127.0.0.1:{port}/";
-        if (BOT_API.severstart)
-        {
-            MessageBox.Show("WebSocketSever: 运行中");
-            return;
-        }
 
         listener = new HttpListener();
         listener.Prefixes.Add(url);
@@ -33,7 +28,7 @@ internal class WebSocketServer
         }
         catch
         {
-            BOT_API.severstart = false;
+            MySvrForm.mForm.openWS = false;
             MessageBox.Show($"{port}:开启失败,请检查端口是否开放");
             return;
         }
@@ -92,10 +87,12 @@ internal class WebSocketServer
                 {
                     string message = Encoding.UTF8.GetString(messageBuffer.ToArray());
 
-                    BOT_msgWS bOT_MsgWS = new BOT_msgWS();
-                    bOT_MsgWS.message = message;
-                    bOT_MsgWS._WebSocket = BOT.Self_WebSocket;
-                    bOT_MsgWS.Self_ID = BOT.Self_ID;
+                    BOT_msgWS bOT_MsgWS = new BOT_msgWS
+                    {
+                        message = message,
+                        _WebSocket = BOT.Self_WebSocket,
+                        Self_ID = BOT.Self_ID
+                    };
                     BOT_API.ReceiveMessage_Queue.Enqueue(bOT_MsgWS);
                     messageBuffer.Clear();
                 }
@@ -104,15 +101,19 @@ internal class WebSocketServer
         }
         catch (Exception Ex)
         {
-            for (int i = 0; i < BOT_API.BOTList_WebSocket.Count; i++)
+            lock (this)
             {
-                if (BOT_API.BOTList_WebSocket[i].Self_ID == BOT.Self_ID)
+                for (int i = 0; i < BOT_API.BOTList_WebSocket.Count; i++)
                 {
-                    MySvrForm.BOT_LoglistADD("WebSocket", "WebSocket", BOT.Self_ID, "已断开", Ex.Message);
-                    BOT_API.BOTList_WebSocket.RemoveAt(i);
-                    break;
+                    if (BOT_API.BOTList_WebSocket[i].Self_ID == BOT.Self_ID)
+                    {
+                        MySvrForm.BOT_LoglistADD("WebSocket", "WebSocket", BOT.Self_ID, "已断开", Ex.Message);
+                        BOT_API.BOTList_WebSocket.RemoveAt(i);
+                        break;
+                    }
                 }
             }
+            
         }
     }
 

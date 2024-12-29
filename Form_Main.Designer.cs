@@ -484,7 +484,7 @@ namespace WindowsFormsApp1
             // 
             this.Tbox_wsProt.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(37)))), ((int)(((byte)(60)))));
             this.Tbox_wsProt.ForeColor = System.Drawing.Color.Aqua;
-            this.Tbox_wsProt.Location = new System.Drawing.Point(52, 24);
+            this.Tbox_wsProt.Location = new System.Drawing.Point(57, 24);
             this.Tbox_wsProt.MaxLength = 5;
             this.Tbox_wsProt.Name = "Tbox_wsProt";
             this.Tbox_wsProt.Size = new System.Drawing.Size(70, 21);
@@ -531,7 +531,7 @@ namespace WindowsFormsApp1
             this.label1.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.label1.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label1.ForeColor = System.Drawing.Color.Cyan;
-            this.label1.Location = new System.Drawing.Point(-1, 26);
+            this.label1.Location = new System.Drawing.Point(9, 26);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(47, 19);
             this.label1.TabIndex = 11;

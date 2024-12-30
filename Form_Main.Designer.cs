@@ -143,10 +143,21 @@ namespace WindowsFormsApp1
             this.meg = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.TabListGmaneSet = new System.Windows.Forms.TabControl();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.listView1 = new System.Windows.Forms.ListView();
+            this.Index = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.name = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.ID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Status = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.SendReceive = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.button1 = new System.Windows.Forms.Button();
+            this.timeS = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lists = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.BOTLOGcontextMenuStrip.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.TabListGmaneSet.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
             // button2
@@ -433,6 +444,7 @@ namespace WindowsFormsApp1
             // 
             this.TabListGmaneSet.Alignment = System.Windows.Forms.TabAlignment.Bottom;
             this.TabListGmaneSet.Controls.Add(this.tabPage1);
+            this.TabListGmaneSet.Controls.Add(this.tabPage2);
             this.TabListGmaneSet.Cursor = System.Windows.Forms.Cursors.Default;
             this.TabListGmaneSet.ItemSize = new System.Drawing.Size(6, 15);
             this.TabListGmaneSet.Location = new System.Drawing.Point(135, 20);
@@ -454,6 +466,93 @@ namespace WindowsFormsApp1
             this.pictureBox2.TabIndex = 2;
             this.pictureBox2.TabStop = false;
             // 
+            // tabPage2
+            // 
+            this.tabPage2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(37)))), ((int)(((byte)(39)))));
+            this.tabPage2.Controls.Add(this.listView1);
+            this.tabPage2.Location = new System.Drawing.Point(4, 4);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(764, 427);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "账号状态";
+            // 
+            // listView1
+            // 
+            this.listView1.Alignment = System.Windows.Forms.ListViewAlignment.Default;
+            this.listView1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(37)))), ((int)(((byte)(39)))));
+            this.listView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.Index,
+            this.name,
+            this.ID,
+            this.Status,
+            this.SendReceive,
+            this.lists,
+            this.timeS});
+            this.listView1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(37)))), ((int)(((byte)(39)))));
+            this.listView1.FullRowSelect = true;
+            this.listView1.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
+            this.listView1.HideSelection = false;
+            this.listView1.Location = new System.Drawing.Point(2, 0);
+            this.listView1.Margin = new System.Windows.Forms.Padding(0);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(750, 426);
+            this.listView1.TabIndex = 1;
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView1.View = System.Windows.Forms.View.Details;
+            // 
+            // Index
+            // 
+            this.Index.Width = 30;
+            // 
+            // name
+            // 
+            this.name.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.name.Width = 100;
+            // 
+            // ID
+            // 
+            this.ID.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.ID.Width = 100;
+            // 
+            // Status
+            // 
+            this.Status.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.Status.Width = 100;
+            // 
+            // SendReceive
+            // 
+            this.SendReceive.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.SendReceive.Width = 100;
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.ForeColor = System.Drawing.Color.Cyan;
+            this.button1.Location = new System.Drawing.Point(10, 174);
+            this.button1.Margin = new System.Windows.Forms.Padding(0);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(120, 24);
+            this.button1.TabIndex = 23;
+            this.button1.TabStop = false;
+            this.button1.Text = "状态";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // timeS
+            // 
+            this.timeS.DisplayIndex = 5;
+            this.timeS.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.timeS.Width = 150;
+            // 
+            // lists
+            // 
+            this.lists.DisplayIndex = 6;
+            this.lists.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.lists.Width = 100;
+            // 
             // MySvrForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -461,6 +560,7 @@ namespace WindowsFormsApp1
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(37)))), ((int)(((byte)(39)))));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(900, 478);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.WS_stop);
             this.Controls.Add(this.Tbox_wsProt);
             this.Controls.Add(this.button_WS_start);
@@ -485,6 +585,7 @@ namespace WindowsFormsApp1
             this.tabPage1.ResumeLayout(false);
             this.TabListGmaneSet.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            this.tabPage2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -506,5 +607,15 @@ namespace WindowsFormsApp1
         private ColumnHeader meg;
         protected internal TabControl TabListGmaneSet;
         private PictureBox pictureBox2;
+        private TabPage tabPage2;
+        protected internal ListView listView1;
+        private ColumnHeader Index;
+        private ColumnHeader name;
+        private ColumnHeader ID;
+        private ColumnHeader Status;
+        private ColumnHeader SendReceive;
+        private Button button1;
+        private ColumnHeader timeS;
+        private ColumnHeader lists;
     }
 }

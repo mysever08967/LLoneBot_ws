@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Threading;
+using System.Timers;
 using System.Windows.Forms;
 using MessageBox = System.Windows.Forms.MessageBox;
 using Point = System.Drawing.Point;
+using Timer = System.Timers.Timer;
 
 namespace WindowsFormsApp1
 {
@@ -223,6 +225,7 @@ namespace WindowsFormsApp1
         private void WS_stop_Click(object sender, EventArgs e)
         {
             openWS = false;
+            timer.Stop();
             List_Self_Client.Clear();
             if (WebSocketServer == null)
                 return;
@@ -239,8 +242,6 @@ namespace WindowsFormsApp1
         {
             BOT_Exit();
         }
-
-
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -314,6 +315,59 @@ namespace WindowsFormsApp1
             public string c;
             public string d;
             public string e;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            TabListGmaneSet.SelectedTab = TabListGmaneSet.TabPages[1];
+        }
+        private static Timer timer;
+        public static void TimerStatus()
+        {
+            timer = new Timer(5000);
+            timer.Elapsed += TimerElapsed;
+            timer.AutoReset = true;
+            timer.Start(); // 启动定时器
+        }
+        static void TimerElapsed(object sender, ElapsedEventArgs e)
+        {
+            mForm.BOTlist.Invoke(new Action(TimerElapsedlistView1));
+        }
+        static void TimerElapsedlistView1()
+        {
+            timer.Stop();
+            mForm.listView1.Items.Clear();
+            lock (List_Self_Client)
+            {
+                for (int i = 0; i < List_Self_Client.Count; i++)
+                {
+                    Self_Client Client = List_Self_Client[i];
+                    if (Client != null)
+                    {
+                        DateTime endTime = DateTime.Now;
+                        TimeSpan difference = endTime - Client.startTime;
+                        string formattedTime = difference.ToString().Substring(0, 8);
+                        System.Windows.Forms.ListViewItem item1 = new System.Windows.Forms.ListViewItem(
+                   new[] {
+                        (i+1).ToString(),
+                        Client.name,
+                        Client.Self_ID,
+                        Client.status,
+                        $"收:{Client.Receive} 发:{Client.Send}",
+
+                        "时长:"+formattedTime,
+                         $"好友:{Client.Friend_List.Count} 群聊:{Client.Group_List.Count}",
+                   });
+                        Color txtColor1 = Color.FromArgb(0, 39, 37, 39);
+                        item1.BackColor = txtColor1;
+                        item1.ForeColor = Color.Cyan;
+                        mForm.listView1.Items.Add(item1);
+                    }
+                }
+            }
+
+            Console.WriteLine("时钟");
+            timer.Start();
         }
     }
 }

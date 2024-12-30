@@ -27,6 +27,12 @@ namespace WindowsFormsApp1
         public string group_name;
     }
 
+    public class Friend_list
+    {
+        public string user_id;
+        public string user_name;
+    }
+
     internal class Self_Client
     {
         private static readonly Dictionary<string, string> replacements = new Dictionary<string, string>
@@ -39,9 +45,12 @@ namespace WindowsFormsApp1
 
         public WebSocket webSocket;
         public string Self_ID;
-        public string LLonebot_ver;
+        public string name = "待获取";
+        public string LLonebot_ver = "待获取";
         public string status = "待获取";
-        private static List<Group_list> Group_List = new List<Group_list>();
+        public DateTime startTime;
+        public List<Friend_list> Friend_List = new List<Friend_list>();
+        public List<Group_list> Group_List = new List<Group_list>();
         public ConcurrentQueue<string> ReceiveQueue = new ConcurrentQueue<string>();
         public ConcurrentQueue<byte[]> SendQueue = new ConcurrentQueue<byte[]>();
         public int Receive;
@@ -49,6 +58,7 @@ namespace WindowsFormsApp1
 
         public void Start(WebSocket ws, string Self)
         {
+            startTime = DateTime.Now;
             webSocket = ws;
             Self_ID = Self;
             Msg_start();
@@ -75,6 +85,7 @@ namespace WindowsFormsApp1
         {
             await Bot_sendQueueAsync();
         }
+
         //转义符
         public static string Msg_Replace(string s)
         {
@@ -89,6 +100,7 @@ namespace WindowsFormsApp1
             }
             return sb.ToString();
         }
+
         //处理收到的消息
         private async Task Bot_MsgQueueAsync()
         {
@@ -100,8 +112,10 @@ namespace WindowsFormsApp1
                     {
                         if (ReceiveQueue.TryDequeue(out string result))
                         {
-                            BOT_MessageParsing(result);
-                            Receive++;
+                            lock (this)
+                            {
+                                BOT_MessageParsing(result);
+                            }
                         }
                     }
                     catch (Exception ex)
@@ -121,6 +135,7 @@ namespace WindowsFormsApp1
             }
             Console.WriteLine("接收结束");
         }
+
         //消息发送队列
         private async Task Bot_sendQueueAsync()
         {
@@ -132,7 +147,10 @@ namespace WindowsFormsApp1
                 {
                     if (SendQueue.TryDequeue(out byte[] result))
                     {
-                        _ = webSocket.SendAsync(new ArraySegment<byte>(result), WebSocketMessageType.Text, true, CancellationToken.None);
+                        lock (this)
+                        {
+                            _ = webSocket.SendAsync(new ArraySegment<byte>(result), WebSocketMessageType.Text, true, CancellationToken.None);
+                        }
 
                         delayTime = 100;
                     }
@@ -154,6 +172,7 @@ namespace WindowsFormsApp1
             }
             Console.WriteLine("发送结束");
         }
+
         //将要发送的消息放入队列
         private void Bot_SendMsg(object obj)
         {
@@ -171,6 +190,7 @@ namespace WindowsFormsApp1
             if (jsonObject.notice_type != null) return "notice_type";
             return null;
         }
+
         //消息类型解析
         private void BOT_MessageParsing(string json)
         {
@@ -310,6 +330,7 @@ namespace WindowsFormsApp1
             switch (echo)
             {
                 case "info":
+                    name = (string)jsonObject.data.nickname;
                     lOGdata.a = "昵称:" + (string)jsonObject.data.nickname;
                     lOGdata.b = "账号:" + Self_ID;
                     lOGdata.c = "账号:" + Self_ID;
@@ -326,13 +347,20 @@ namespace WindowsFormsApp1
                         lOGdata.c = "账号:" + Self_ID;
                         lOGdata.d = "需重启QQ";
                         lOGdata.e = jsonObject.ToString();
-                        MySvrForm.BOT_LoglistADD(lOGdata);
+                        BOT_LoglistADD(lOGdata);
                         break;
+                    }
+                    for (int i = 0; i < jsonObject.data.Count; i++)
+                    {
+                        Friend_list list = new Friend_list();
+                        list.user_id = (string)jsonObject.data[i].user_id;
+                        list.user_id = (string)jsonObject.data[i].nickname;
+                        Friend_List.Add(list);
                     }
                     lOGdata.a = "账号:" + Self_ID;
                     lOGdata.b = "账号:" + Self_ID;
                     lOGdata.c = "获取好友";
-                    lOGdata.d = "好友:" + jsonObject.data.Count;
+                    lOGdata.d = "好友:" + Friend_List.Count;
                     lOGdata.e = jsonObject.ToString();
                     BOT_LoglistADD(lOGdata);
                     break;
@@ -463,9 +491,11 @@ namespace WindowsFormsApp1
         //私聊消息类型
         private void BOT_message_type(dynamic jsonObject)
         {
+            Receive++;
             switch (jsonObject.message_type.ToString())
             {
                 case "group":
+
                     string _message = Msg_Replace((string)jsonObject.raw_message);
                     ClientData group_Data = new ClientData
                     {
@@ -550,6 +580,7 @@ namespace WindowsFormsApp1
         //群消息处理
         private void Group_Message(ClientData Data)
         {
+            Receive++;
             LOGdata lOGdata = new LOGdata
             {
                 a = Get_Group_name(Data.group_id),
@@ -565,6 +596,7 @@ namespace WindowsFormsApp1
             }
             // 在这里写BOT群指令功能回复等等
         }
+
         //收到链接和心跳
         private void BOT_meta_event_type(dynamic jsonObject)
         {

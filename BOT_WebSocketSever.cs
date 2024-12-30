@@ -42,6 +42,7 @@ internal class WebSocketServer
             e = wsURL
         };
         MySvrForm.BOT_LoglistADD(lOGdata);
+        MySvrForm.TimerStatus();
         MySvrForm.mForm.TabListGmaneSet.SelectedTab = MySvrForm.mForm.TabListGmaneSet.TabPages[0];
         while (MySvrForm.mForm.openWS)
         {
@@ -54,7 +55,6 @@ internal class WebSocketServer
                     var headers = context.Request.Headers;
                     // var userAgent = headers["User-Agent"];
                     var Self_ID = headers["X-Self-ID"];
-                    Console.WriteLine(Self_ID);
                     HttpListenerWebSocketContext wtext = await context.AcceptWebSocketAsync(null);
                     Self_Client self_Client = new Self_Client();
                     self_Client.Start(wtext.WebSocket, Self_ID);
@@ -94,8 +94,12 @@ internal class WebSocketServer
                 messageBuffer.AddRange(buffer.Take(result.Count));
                 if (result.EndOfMessage)
                 {
-                    string message = Encoding.UTF8.GetString(messageBuffer.ToArray());
-                    BOT.ReceiveQueue.Enqueue(message);
+                    lock (BOT)
+                    {
+                        string message = Encoding.UTF8.GetString(messageBuffer.ToArray());
+                        BOT.ReceiveQueue.Enqueue(message);
+                    }
+
                     messageBuffer.Clear();
                 }
                 result = await BOT.webSocket.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
